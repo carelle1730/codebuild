@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    command:
+      - yum install gradle 
+  pre_build:
+    commands:
+      - wget -O ~/gradle-4.7-bin.zip https://services.gradle.org/distributions/gradle-4.7-bin.zip
+      - sudo yum -y install unzip java-1.8.0-openjdk
+      - sudo mkdir /opt/gradle
+      - sudo unzip -d /opt/gradle/ ~/gradle-4.7-bin.zip
+
+  build: 
+    commands:
+      - echo build gradle 
+
+phases:
+  install:
+    runtime-version:
+      nodejs: 12
+    command: 
+      - install gradlew  
+
+  pre_build:  
+    commands:
+      - gradle wrapper
+      - ./gradlew build 
+
